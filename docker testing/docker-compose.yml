@@ -1,0 +1,8 @@
+version: "2"
+services:
+  qbittorrent:
+    image: linuxserver/qbittorrent:4.5.5
+    container_name: qbittorrent
+    restart: no
+    ports:
+      - 8080:8080
