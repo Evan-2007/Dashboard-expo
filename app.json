@@ -40,4 +40,11 @@
     "supportsTablet": true,
     "bundleIdentifier": "dev.evanc.dashboard-expo"
   },
+  "android": {
+    "package": "com.yourcompany.v1router",
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/images/adaptive-icon.png",
+      "backgroundColor": "#ffffff"
+  }
+}
 }
