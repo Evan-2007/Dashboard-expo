@@ -9,7 +9,6 @@ workflows:
         beta_groups:
           - Beta Testers
 
-
     scripts:
       - name: Install Expo CLI and eject
         script: | 
@@ -24,5 +23,18 @@ workflows:
       - name: Install CocoaPods dependencies
         script: |
             cd ios && pod install
+
+      # ... your other commands
+
+      - name: Build and Archive the iOS app
+        script: |
+            expo build:ios -t archive
+            xcodebuild -workspace ios/YourProjectName.xcworkspace -scheme YourSchemeName -sdk iphoneos -configuration Release archive -archivePath $CM_BUILD_DIR/MyApp.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+      - name: Create IPA
+        script: |
+            xcodebuild -exportArchive -archivePath $CM_BUILD_DIR/MyApp.xcarchive -exportPath $CM_BUILD_DIR/MyApp.ipa -exportOptionsPlist path_to_export_options_plist.plist
+
+      # ... your other commands
 
       # ... your build commands
