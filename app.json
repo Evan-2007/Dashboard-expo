@@ -35,5 +35,9 @@
     "experiments": {
       "typedRoutes": true
     }
-  }
+  },
+  "ios": {
+    "supportsTablet": true,
+    "bundleIdentifier": "dev.evanc.dashboard-expo"
+  },
 }
