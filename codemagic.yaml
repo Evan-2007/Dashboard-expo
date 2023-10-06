@@ -6,3 +6,35 @@ workflows:
       ios_signing:
         distribution_type: development # or: ad_hoc | development | enterprise
         bundle_identifier: dev.evanc.dashboard-expo
+        workflows:
+
+      integrations:
+        app_store_connect: codemagic
+      environment:
+        vars:
+          APP_STORE_APPLE_ID: 1555555551
+      scripts:
+        - name: v0.0
+          script: | 
+            #!/bin/sh
+            cd $CM_BUILD_DIR
+            LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID")
+            agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
+        - name: Build ipa for distribution
+
+  scripts:
+    - name: Install Expo CLI and eject
+      script: | 
+        yarn install
+        yarn global add expo-cli
+        expo eject
+    - name: Set Info.plist values
+      script: | 
+        PLIST=$CM_BUILD_DIR/$XCODE_SCHEME/Info.plist
+        PLIST_BUDDY=/usr/libexec/PlistBuddy
+        $PLIST_BUDDY -c "Add :ITSAppUsesNonExemptEncryption bool false" $PLIST
+    - name: Install CocoaPods dependencies
+      script: |
+          cd ios && pod install
+    
+    # ... your build commands
