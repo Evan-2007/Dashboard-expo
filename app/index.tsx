@@ -1,5 +1,7 @@
 import { Link, Stack } from 'expo-router';
 import { Image, Text, View, Button, Pressable } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 function LogoTitle() {
   return (
@@ -37,7 +39,7 @@ export default function Home() {
                 <Text>2</Text>
             </Pressable>
         </Link>
-        <Link href="/nas" asChild>
+        <Link href="/addservice" asChild>
             <Pressable>
                 <Text>3</Text>
             </Pressable>

@@ -10,8 +10,27 @@ export default function Layout(){
         headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
+
+          
         },
       }}
-    />
+    >
+
+
+    <Stack.Screen
+        name="index"
+        options={{
+          // Hide the header for all other routes.
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="addservice"
+        options={{
+          // Set the presentation mode to modal for our modal route.
+          presentation: 'modal',
+        }}
+      />
+    </Stack>
   );
 }
