@@ -30,7 +30,6 @@ export default function Layout(){
           name="addservice"
           options={{
             // Set the presentation mode to modal for our modal route.
-            presentation: 'modal',
           }}
         />
       </Stack>

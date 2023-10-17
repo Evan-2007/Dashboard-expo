@@ -3,6 +3,8 @@ import {
   TextInput, 
   Text, 
   StyleSheet,
+  Image,
+  ScrollView,
 } from 'react-native';
 
 
@@ -10,7 +12,7 @@ import { Link, router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SelectList } from 'react-native-dropdown-select-list'
 import React from 'react';
-import { Image } from 'expo-image';
+
 
 
 
@@ -19,14 +21,14 @@ import { Image } from 'expo-image';
 export default function Modal() {
 
   const supportedServices = [
-    {key:'1', value:'Qbittorent', image:'/assets/Qbittorrent.png'},
-    {key:'2', value:'TrueNAS Scale', image:''},
-    {key:'3', value:'Prowlarr', image:''},
-    {key:'4', value:'Radarr', image:''},
-    {key:'5', value:'Sonarr', image:''},
-    {key:'6', value:'Jellyfin', image:''},
-    {key:'7', value:'Plex', image:''},
-    {key:'8', value:'Docker', image:''},
+    {key:'1', value:'Qbittorent', image: require('./assets/images/Qbittorrent.png')},
+    {key:'2', value:'TrueNAS Scale', image: require('./assets/images/Qbittorrent.png')},
+    {key:'3', value:'Prowlarr', image: require('./assets/images/Qbittorrent.png')},
+    {key:'4', value:'Radarr', image: require('./assets/images/Qbittorrent.png')},
+    {key:'5', value:'Sonarr', image: require('./assets/images/Qbittorrent.png')},
+    {key:'6', value:'Jellyfin', image: require('./assets/images/Qbittorrent.png')},
+    {key:'7', value:'Plex', image: require('./assets/images/Qbittorrent.png')},
+    {key:'8', value:'Docker', image: require('./assets/images/Qbittorrent.png')},
   ]
 
   // If the page was reloaded or navigated to directly, then the modal should be presented as
@@ -39,22 +41,22 @@ export default function Modal() {
       {/* Native modals have dark backgrounds on iOS, set the status bar to light content. */}
       <StatusBar style="light" />
 
-    <View style={styles.container}>
-      {supportedServices.map((service) => (
-        <View key={service.value} style={styles.map}>
-          <Link href={'/add'}>
-            <View>
-              <Image source={service.image} />
-              <Text>{service.value}</Text>
-            </View>
-          </Link>
-        </View>
-      ))}
+      <View style={styles.container}>
+        <ScrollView>
+        {supportedServices.map((service) => (
+          <View key={service.value} style={styles.map}>
+            <Link 
+              href={`/${service.key}`}>
+              <View>
+                <Image source={service.image} style={styles.icon}/>
+                <Text>{service.value}</Text>
+              </View>
+            </Link>
+          </View>
+        ))}
+        </ScrollView>
+      </View>
     </View>
-
-    </View>
-
-
   );
 }
 
@@ -75,5 +77,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
   },
+  icon: {
+    flex: 1,
+    width: 50,
+    height: 50,
+  }
 
 });
